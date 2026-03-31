@@ -1,0 +1,14 @@
+16:42:57.702 [main] INFO  micheal65536.vienna.tappablesgenerator.Main - Loading static data
+16:42:57.840 [main] FATAL micheal65536.vienna.tappablesgenerator.Main - Failed to load static data
+micheal65536.vienna.staticdata.StaticDataException: java.io.FileNotFoundException: ./data/catalog/items.json (No such file or directory)
+	at micheal65536.vienna.staticdata.Catalog.<init>(Catalog.java:36) ~[tappablesgenerator-0.0.1-SNAPSHOT-jar-with-dependencies.jar:?]
+	at micheal65536.vienna.staticdata.StaticData.<init>(StaticData.java:16) ~[tappablesgenerator-0.0.1-SNAPSHOT-jar-with-dependencies.jar:?]
+	at micheal65536.vienna.tappablesgenerator.Main.main(Main.java:59) [tappablesgenerator-0.0.1-SNAPSHOT-jar-with-dependencies.jar:?]
+Caused by: java.io.FileNotFoundException: ./data/catalog/items.json (No such file or directory)
+	at java.base/java.io.FileInputStream.open0(Native Method) ~[?:?]
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:213) ~[?:?]
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:152) ~[?:?]
+	at java.base/java.io.FileReader.<init>(FileReader.java:75) ~[?:?]
+	at micheal65536.vienna.staticdata.Catalog$ItemsCatalog.<init>(Catalog.java:49) ~[tappablesgenerator-0.0.1-SNAPSHOT-jar-with-dependencies.jar:?]
+	at micheal65536.vienna.staticdata.Catalog.<init>(Catalog.java:24) ~[tappablesgenerator-0.0.1-SNAPSHOT-jar-with-dependencies.jar:?]
+	... 2 more
