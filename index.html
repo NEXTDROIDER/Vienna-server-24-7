@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextDroider — Установка</title>
+    <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-tertiary: #21262d;
+            --border-color: #30363d;
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --accent-blue: #58a6ff;
+            --accent-green: #238636;
+            --accent-yellow: #d29922;
+            --accent-red: #da3633;
+            --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 0;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 0;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.2em;
+        }
+
+        h2 {
+            color: var(--text-primary);
+            margin: 40px 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 1.8em;
+        }
+
+        h3 {
+            color: var(--accent-blue);
+            margin: 30px 0 15px 0;
+            font-size: 1.3em;
+        }
+
+        .warning {
+            background-color: rgba(210, 153, 34, 0.1);
+            border: 1px solid var(--accent-yellow);
+            border-radius: 6px;
+            padding: 16px;
+            margin: 20px 0;
+            display: flex;
+            align-items: start;
+            gap: 12px;
+        }
+
+        .warning::before {
+            content: "⚠️";
+            font-size: 1.2em;
+        }
+
+        .info {
+            background-color: rgba(88, 166, 255, 0.1);
+            border: 1px solid var(--accent-blue);
+            border-radius: 6px;
+            padding: 16px;
+            margin: 20px 0;
+        }
+
+        .code-block {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 16px;
+            margin: 16px 0;
+            font-family: var(--font-mono);
+            font-size: 0.9em;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .code-block::before {
+            content: attr(data-lang);
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 4px 8px;
+            font-size: 0.75em;
+            color: var(--text-secondary);
+            background-color: var(--bg-tertiary);
+            border-bottom-left-radius: 6px;
+            border-top-right-radius: 6px;
+        }
+
+        .code-block.windows::before { content: "Windows"; color: var(--accent-blue); }
+        .code-block.linux::before { content: "Linux"; color: var(--accent-green); }
+        .code-block.bash::before { content: "Bash"; }
+
+        code {
+            font-family: var(--font-mono);
+            background-color: var(--bg-tertiary);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.9em;
+            color: var(--accent-blue);
+        }
+
+        .code-block code {
+            background-color: transparent;
+            padding: 0;
+            color: inherit;
+        }
+
+        .highlight {
+            color: var(--accent-green);
+            font-weight: bold;
+        }
+
+        .requirement {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 20px;
+            margin: 10px 0;
+            display: grid;
+            grid-template-columns: 30px 1fr;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .requirement-icon {
+            font-size: 1.5em;
+        }
+
+        .step {
+            margin: 30px 0;
+            padding-left: 20px;
+            border-left: 3px solid var(--accent-blue);
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 28px;
+            height: 28px;
+            background-color: var(--accent-blue);
+            color: var(--bg-primary);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 0.9em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: var(--bg-secondary);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: var(--bg-tertiary);
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        tr:hover {
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+
+        .quick-start {
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+            border: 2px solid var(--accent-green);
+            border-radius: 8px;
+            padding: 24px;
+            margin: 30px 0;
+        }
+
+        .quick-start h3 {
+            color: var(--accent-green);
+            margin-top: 0;
+        }
+
+        .btn-copy {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 4px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8em;
+            transition: all 0.2s;
+        }
+
+        .btn-copy:hover {
+            background-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        footer {
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9em;
+        }
+
+        a {
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        ul {
+            margin: 10px 0 10px 20px;
+        }
+
+        li {
+            margin: 8px 0;
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2em; }
+            .container { padding: 20px 15px; }
+            .step { padding-left: 15px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>NextDroider</h1>
+            <p class="subtitle">Руководство по установке и настройке</p>
+        </header>
+
+        <div class="warning">
+            <strong>Важно:</strong> Для работы проекта требуется <span class="highlight">Java 17</span> или выше. Убедитесь, что Java установлена перед запуском установщика.
+        </div>
+
+        <h2>📋 Системные требования</h2>
+        
+        <table>
+            <tr>
+                <th>Компонент</th>
+                <th>Версия</th>
+                <th>Проверка</th>
+            </tr>
+            <tr>
+                <td><strong>Java</strong></td>
+                <td>17+ (JDK или JRE)</td>
+                <td><code>java -version</code></td>
+            </tr>
+            <tr>
+                <td><strong>Windows</strong></td>
+                <td>10 (1803+) / 11</td>
+                <td><code>winver</code></td>
+            </tr>
+            <tr>
+                <td><strong>Linux</strong></td>
+                <td>Ubuntu 20.04+, CentOS 8+, Arch</td>
+                <td><code>uname -r</code></td>
+            </tr>
+            <tr>
+                <td><strong>cURL</strong></td>
+                <td>7.60+</td>
+                <td><code>curl --version</code></td>
+            </tr>
+        </table>
+
+        <h3>☕ Установка Java 17</h3>
+        
+        <div class="step">
+            <p><span class="step-number">1</span><strong>Windows:</strong></p>
+            <ol>
+                <li>Скачайте установщик с <a href="https://adoptium.net/" target="_blank">adoptium.net</a> (Eclipse Temurin JDK 17)</li>
+                <li>Запустите .exe файл и следуйте инструкциям</li>
+                <li>Перезагрузите терминал и проверьте: <code>java -version</code></li>
+            </ol>
+        </div>
+
+        <div class="step">
+            <p><span class="step-number">2</span><strong>Linux:</strong></p>
+            <div class="code-block bash" data-lang="Bash">
+                <button class="btn-copy" onclick="navigator.clipboard.writeText(this.nextElementSibling.innerText)">Копировать</button>
+                <code>
+# Ubuntu/Debian<br>
+sudo apt update && sudo apt install openjdk-17-jdk -y<br><br>
+# Fedora<br>
+sudo dnf install java-17-openjdk-devel -y<br><br>
+# Arch Linux<br>
+sudo pacman -S jdk17-openjdk<br><br>
+# Проверка<br>
+java -version
+                </code>
+            </div>
+        </div>
+
+        <h2>🚀 Быстрая установка</h2>
+
+        <div class="quick-start">
+            <h3>⚡ One-liner установка</h3>
+            <p>Скопируйте команду для вашей ОС и вставьте в терминал:</p>
+            
+            <h4 style="margin-top: 20px; color: var(--accent-blue);">Windows (CMD):</h4>
+            <div class="code-block windows">
+                <button class="btn-copy" onclick="navigator.clipboard.writeText('curl github.com/nextdroider/installer.bat || cmd')">Копировать</button>
+                <code>curl github.com/nextdroider/installer.bat || cmd</code>
+            </div>
+
+            <h4 style="margin-top: 20px; color: var(--accent-green);">Linux (Terminal):</h4>
+            <div class="code-block linux">
+                <button class="btn-copy" onclick="navigator.clipboard.writeText('curl github.com/nextdroider/installer.sh || sh')">Копировать</button>
+                <code>curl github.com/nextdroider/installer.sh || sh</code>
+            </div>
+
+            <div class="info" style="margin-top: 15px;">
+                <strong>Примечание:</strong> Оператор <code>||</code> (логическое ИЛИ) гарантирует, что если curl завершится с ошибкой (например, файл не найден), выполнится вторая команда (cmd или sh).
+            </div>
+        </div>
+
+        <h2>🪟 Подробная установка на Windows</h2>
+
+        <div class="step">
+            <p><span class="step-number">1</span>Откройте командную строку</p>
+            <p>Нажмите <code>Win + R</code>, введите <code>cmd</code> и нажмите Enter. Для установки системных компонентов запускайте от имени администратора.</p>
+        </div>
+
+        <div class="step">
+            <p><span class="step-number">2</span>Выполните установку</p>
+            <div class="code-block windows">
+                <code>curl github.com/nextdroider/installer.bat || cmd</code>
+            </div>
+            <p>Если команда выше не срабатывает, используйте полный URL:</p>
+            <div class="code-block windows">
+                <code>curl -L https://raw.githubusercontent.com/nextdroider/installer.bat || cmd</code>
+            </div>
+        </div>
+
+        <div class="step">
+            <p><span class="step-number">3</span>Следуйте инструкциям</p>
+            <p>Скрипт автоматически:
+                <ul>
+                    <li>Проверит наличие Java 17+</li>
+                    <li>Скачает необходимые файлы</li>
+                    <li>Настроит переменные среды</li>
+                    <li>Создаст ярлыки</li>
+                </ul>
+            </p>
+        </div>
+
+        <h3>⚠️ Устранение неполадок Windows</h3>
+        
+        <div class="requirement">
+            <div class="requirement-icon">❌</div>
+            <div>
+                <strong>'curl' is not recognized</strong><br>
+                Обновите Windows до версии 1803 или выше, либо скачайте curl с <a href="https://curl.se/windows/">curl.se</a>
+            </div>
+        </div>
+
+        <div class="requirement">
+            <div class="requirement-icon">❌</div>
+            <div>
+                <strong>Java not found</strong><br>
+                Установите JDK 17 (см. раздел выше) и убедитесь, что переменная JAVA_HOME настроена
+            </div>
+        </div>
+
+        <h2>🐧 Подробная установка на Linux</h2>
+
+        <div class="step">
+            <p><span class="step-number">1</span>Откройте терминал</p>
+            <p><code>Ctrl + Alt + T</code> или найдите Terminal в меню приложений</p>
+        </div>
+
+        <div class="step">
+            <p><span class="step-number">2</span>Запустите установщик</p>
+            <div class="code-block linux">
+                <code>curl github.com/nextdroider/installer.sh || sh</code>
+            </div>
+            <p>Если требуются права root:</p>
+            <div class="code-block linux">
+                <code>curl github.com/nextdroider/installer.sh || sudo sh</code>
+            </div>
+        </div>
+
+        <div class="step">
+            <p><span class="step-number">3</span>Альтернативный метод (если curl | sh не работает)</p>
+            <div class="code-block bash">
+                <code>
+curl -L -o install.sh github.com/nextdroider/installer.sh<br>
+chmod +x install.sh<br>
+./install.sh
+                </code>
+            </div>
+        </div>
+
+        <h2>📁 Структура проекта</h2>
+        <p>После установки проект будет расположен в:</p>
+        <ul>
+            <li><strong>Windows:</strong> <code>%LOCALAPPDATA%\NextDroider\</code></li>
+            <li><strong>Linux:</strong> <code>~/.local/share/nextdroider/</code> или <code>/opt/nextdroider/</code></li>
+        </ul>
+
+        <div class="code-block">
+            <code>
+nextdroider/<br>
+├── bin/              # Исполняемые файлы<br>
+├── config/           # Файлы конфигурации<br>
+├── logs/             # Логи работы<br>
+├── installer.bat     # Установщик Windows<br>
+├── installer.sh      # Установщик Linux<br>
+└── README.md
+            </code>
+        </div>
+
+        <h2>❓ Частые вопросы (FAQ)</h2>
+
+        <div class="step">
+            <p><strong>Как проверить версию Java?</strong></p>
+            <div class="code-block">
+                <code>java -version</code>
+            </div>
+            <p>Должно отобразиться <code>openjdk version "17</code> или выше.</p>
+        </div>
+
+        <div class="step">
+            <p><strong>Как удалить проект?</strong></p>
+            <div class="code-block windows">curl github.com/nextdroider/uninstaller.bat || cmd</div>
+            <div class="code-block linux">curl github.com/nextdroider/uninstaller.sh || sh</div>
+        </div>
+
+        <div class="step">
+            <p><strong>Где находятся логи?</strong></p>
+            <p>В папке <code>logs/</code> внутри директории установки. При ошибках прикрепляйте файл <code>install.log</code> к Issue на GitHub.</p>
+        </div>
+
+        <h2>📞 Поддержка</h2>
+        <div class="info">
+            <p><strong>GitHub:</strong> <a href="https://github.com/nextdroider/issues">github.com/nextdroider/issues</a></p>
+            <p><strong>Документация:</strong> <a href="https://github.com/nextdroider/wiki">github.com/nextdroider/wiki</a></p>
+            <p><strong>Email:</strong> support@nextdroider.example.com</p>
+        </div>
+
+        <footer>
+            <p>© 2025 NextDroider Project. Лицензия MIT.</p>
+            <p style="margin-top: 10px; font-size: 0.8em; color: var(--text-secondary);">
+                Все команды предоставлены "как есть". Убедитесь, что вы доверяете источнику перед выполнением скриптов.
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // Автоматическое копирование с анимацией
+        document.querySelectorAll('.btn-copy').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const original = this.innerText;
+                this.innerText = 'Скопировано!';
+                this.style.backgroundColor = 'var(--accent-green)';
+                this.style.color = 'white';
+                setTimeout(() => {
+                    this.innerText = original;
+                    this.style.backgroundColor = '';
+                    this.style.color = '';
+                }, 2000);
+            });
+        });
+    </script>
+</body>
+</html>
